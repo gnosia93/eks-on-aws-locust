@@ -6,6 +6,7 @@ import base64
 class sample(HttpUser):
 	wait_time = between(1, 3)
 	access_token = ""
+	
 	def on_start(self):
 		print("start test")
 		self.faker = Faker('ko-KR')
