@@ -11,7 +11,8 @@ from locust.main import main
 https://docs.locust.io/en/stable/configuration.html#environment-variables
 """
 
-def run_locust():
+def run_locust(url):
+	os.environ['LOCUST_HOST'] = url
 	os.environ['LOCUST_USERS'] = "300"
 	os.environ['LOCUST_RUN_TIME'] = "10m"
 	os.environ['LOCUST_NO_WEB'] = "True"
@@ -21,4 +22,8 @@ def run_locust():
 #	os.environ['LOCUST_HATCH_RATE'] = str(kwargs.get('LOCUST_HATCH_RATE'))
 	main()
 
-run_locust()
+if len(sys.argv) != 2:
+	print("usage: python test.py <URL>")
+	exit(-1)
+
+run_locust(sys.argv[1])
