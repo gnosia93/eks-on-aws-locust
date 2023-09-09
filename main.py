@@ -3,7 +3,7 @@ __license__ = "GPL"
 __version__ = "0.0.1"
 __email__ = "gnosia93@naver.com"
 
-import os
+import os, sys
 from locust.main import main
 
 """
@@ -12,7 +12,7 @@ https://docs.locust.io/en/stable/configuration.html#environment-variables
 """
 
 def run_locust():
-	os.environ['LOCUST_HOST'] = "http://localhost:8080"
+	os.environ['LOCUST_HOST'] = sys.argv[1]
 	os.environ['LOCUST_USERS'] = "300"
 	os.environ['LOCUST_RUN_TIME'] = "10m"
 	os.environ['LOCUST_NO_WEB'] = "True"
@@ -21,5 +21,10 @@ def run_locust():
 #	os.environ['LOCUST_CLIENTS'] = str(kwargs.get('LOCUST_CLIENTS'))
 #	os.environ['LOCUST_HATCH_RATE'] = str(kwargs.get('LOCUST_HATCH_RATE'))
 	main()
+
+if len(sys.argv) != 2:
+	print("TARGET_HOST is missing...")
+	print("usage: python main.py <TARGET_HOST>")
+	exit(-1)
 
 run_locust()
