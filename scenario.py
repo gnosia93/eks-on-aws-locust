@@ -2,6 +2,7 @@ import json
 from locust import HttpUser, task, between
 from faker import Faker
 import base64
+
 class sample(HttpUser):
 	wait_time = between(1, 3)
 	access_token = ""
@@ -18,9 +19,9 @@ class sample(HttpUser):
 		name = self.faker.name()
 		data = {	
 		    "password": base64.b64encode(name.encode('utf-8')).decode('utf-8'),
-			"name": name,
-    		"phoneNumber": self.faker.phone_number(),
-    		"emailAddress": self.faker.email()
+		    "name": name,
+	 	    "phoneNumber": self.faker.phone_number(),
+    	  	    "emailAddress": self.faker.email()
 		}
 		self.client.post("/member/add", json.dumps(data), headers={"Content-Type" : "application/json"})
 
