@@ -11,8 +11,8 @@ from locust.main import main
 https://docs.locust.io/en/stable/configuration.html#environment-variables
 """
 
-def run_locust():
-	os.environ['LOCUST_HOST'] = sys.argv[1]
+def run_locust(host):
+	os.environ['LOCUST_HOST'] = host
 	os.environ['LOCUST_USERS'] = "300"
 	os.environ['LOCUST_RUN_TIME'] = "10m"
 	os.environ['LOCUST_NO_WEB'] = "True"
@@ -27,4 +27,4 @@ if len(sys.argv) != 2:
 	print("usage: python main.py <TARGET_HOST>")
 	exit(-1)
 
-run_locust()
+run_locust(sys.argv[1])
