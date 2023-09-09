@@ -15,7 +15,6 @@ class sample(HttpUser):
 
 	@task
 	def add(self):
-
 		name = self.faker.name()
 		data = {	
 		    "password": base64.b64encode(name.encode('utf-8')).decode('utf-8'),
