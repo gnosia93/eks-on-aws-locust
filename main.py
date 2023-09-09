@@ -1,25 +1,22 @@
-import json
-from locust import HttpUser,  task , between
+import os
+from locust.main import main
 
-class sample(HttpUser):
-	wait_time = between(1, 3)
-	access_token = ""
-	def on_start(self):		
-		print("start test")		
 
-	def on_stop(self):		
-		print("end test")		
+"""
+커맨드 라인 실행할때 념겨줄수 있는 환경변수 모음.
+https://docs.locust.io/en/stable/configuration.html#environment-variables
+"""
 
-	@task
-	def add(self):
-		data = {	
-		    	"password": "7771",
-			"name": "111",
-    			"phoneNumber": "9-111-11",
-    			"emailAddress": "9999@example.com"
-		}
-		self.client.post("/member/add", json.dumps(data), headers={"Content-Type" : "application/json"})
+def run_locust():
+	os.environ['LOCUST_HOST'] = "http://localhost:8080"
+	os.environ['LOCUST_USERS'] = "300"
+	os.environ['LOCUST_RUN_TIME'] = "10m"
+	os.environ['LOCUST_NO_WEB'] = "True"
+	os.environ['LOCUST_LOCUSTFILE'] = "scenario.py"
+	os.environ['LOCUST_WEB_PORT'] = "8081"
+#	os.environ['LOCUST_CLIENTS'] = str(kwargs.get('LOCUST_CLIENTS'))
+#	os.environ['LOCUST_HATCH_RATE'] = str(kwargs.get('LOCUST_HATCH_RATE'))
+	main()
 
-	@task
-	def get(self):
-		self.client.get("/member/1", headers={"Content-Type" : "application/json"})
+
+run_locust()
