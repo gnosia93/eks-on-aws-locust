@@ -1,6 +1,10 @@
+__author__ = "soonbeom kwon"
+__license__ = "GPL"
+__version__ = "0.0.1"
+__email__ = "gnosia93@naver.com"
+
 import os
 from locust.main import main
-
 
 """
 커맨드 라인 실행할때 념겨줄수 있는 환경변수 모음.
@@ -17,6 +21,5 @@ def run_locust():
 #	os.environ['LOCUST_CLIENTS'] = str(kwargs.get('LOCUST_CLIENTS'))
 #	os.environ['LOCUST_HATCH_RATE'] = str(kwargs.get('LOCUST_HATCH_RATE'))
 	main()
-
 
 run_locust()
